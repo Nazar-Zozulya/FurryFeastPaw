@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'UserPages/css/base-css.css' %}">
+    {% block css %}
+    {% endblock %}
+    {% block js %}
+    {% endblock %}
+    <title>Document</title>
+</head>
+<body>
+    <nav class="side-menu">
+        <a href="{% url 'main' %}" class="logo">
+            <p>Furry Feast</p>
+        </a>
+        
+        <div class = 'top-categories'>
+            <a href="{% url 'main' %}"><img src="{% static 'UserPages/img/side-menu/catalog.png' %}" alt="">Товари</a>
+            <a href="{% url 'cart' %}"><img src="{% static 'UserPages/img/side-menu/cart.png' %}" alt="">Кошик</a>
+            <a href="{% url 'contact' %}"><img src="{% static 'UserPages/img/side-menu/contact.png' %}" alt="">Контакти</a>
+        </div>
+
+
+        {% block filter %}
+        {% endblock %}
+        
+
+        <div class = 'bot-categories'>
+            <a href="{% url 'login' %}"><img src="{% static 'UserPages/img/side-menu/login.png' %}" alt="">Увійти</a>
+            <a href="{% url 'registration' %}"><img src="{% static 'UserPages/img/side-menu/registration.png' %}" alt="">Реєстрація</a>
+        </div>
+    </nav>
+    <main>
+        <img class='paw1'src="{% static 'Catalog/img/bacground.png' %}" alt="">
+        <img class='paw2'src="{% static 'Catalog/img/bacground.png' %}" alt="">
+        <img class='paw3'src="{% static 'Catalog/img/bacground.png' %}" alt="">
+        <img class='paw4'src="{% static 'Catalog/img/bacground.png' %}" alt="">
+        <img class='paw5'src="{% static 'Catalog/img/bacground.png' %}" alt="">
+        <img class='paw6'src="{% static 'Catalog/img/bacground.png' %}" alt="">
+        <img class='paw7'src="{% static 'Catalog/img/bacground.png' %}" alt="">
+        {% block content %}
+        {% endblock %}
+    </main> 
+    
+</body>
+</html>

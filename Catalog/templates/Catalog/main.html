@@ -1,0 +1,71 @@
+{% extends 'UserPages/base.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'Catalog/css/main.css' %}">
+{% endblock %}
+
+{% block js %}
+    <script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script defer src="{% static 'Catalog/js/main.js' %}"></script>
+    
+{% endblock %}
+
+{% block content %}
+    <p class="title">Товари</p>
+    <form class="input-search" method = "POST" action="{% url 'main' %}">
+        {% csrf_token %}
+        <input class = 'input-field' type="search" placeholder = 'Пошук'>
+        <button class = 'but-search' type="submit"><img src="{% static 'Catalog/img/search.png' %}" alt=""></button>
+    </form>
+    
+    <div class="goods">
+        {% for product in products %}
+            <div class = 'section' id="section-{{ product.pk }}">
+                <div class="img-box">
+                    <a href="product/{{ product.pk }}"><img src="{{ product.image.url }}" alt=""></a>
+                </div>
+                
+                    <a href="product/{{ product.pk }}" class = 'description'>{{ product.name }} </a>
+                    
+                <div class = group-button>
+                    <!-- <button class = 'button-buy'><a href="">Переглянути</a></button> -->
+                    <p class ='price'>Ціна: {{ product.price }} грн</p>
+                    <button class = 'button-basket'><img src="{% static 'Catalog/img/button-cart.png' %}"></button>
+                </div>
+                
+            </div>
+        {% endfor %}
+
+    </div>
+    <div class="modal-window-add-cart">
+        <p>Товар успiшно додано</p>
+        <div class="go-to-cart">
+            <img src="{% static 'Catalog/img/modal-window-button-cart.png' %}" alt="">
+            <a href="{% url 'cart' %}">Перейти до кошику</a>
+        </div>
+        
+    </div>
+{% endblock %}
+
+{% block filter %}
+    <form class="all-filter" method = "POST" action="{% url 'main' %}">
+        {% csrf_token %}
+        <p class="filter-text">Фильтри:</p>
+        <div> 
+            <p>Вид:</p>
+            <ul i>
+                <li class="kind">Сухий</li>
+                <li class="kind">Вологий</li>
+            </ul>
+        </div>
+        <div> 
+            <p>Тварина:</p>
+            <ul>
+                <li class="animal">Кіт</li>
+                <li class="animal">Собака</li>
+            </ul>
+        </div>
+    </form>
+{% endblock %}
